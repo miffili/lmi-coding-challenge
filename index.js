@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -12,7 +13,7 @@ var tasks = {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -21,7 +22,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname + '/public/index.html'));
+	res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 app.get('/api/tasks', function(req, res) {
@@ -48,10 +49,10 @@ app.post('/api/tasks', function(req, res) {
 
 app.put('/api/tasks/:id', function(req, res) {
 	console.log('PUT a new Task', req.params.id, req.body);
-        if (!tasks[req.params.id]) {
-                res.status(404).send();
-                return;
-        }
+		if (!tasks[req.params.id]) {
+			res.status(404).send();
+			return;
+		}
 
 	tasks[req.params.id].text = req.body.text;
 	res.status(204).send();
