@@ -14,7 +14,8 @@ const StyledForm = styled.form`
 const AddItemForm: React.FC<AddItemProps> = ({ newTodo, onChange, onSubmit }) => {
   return (
     <StyledForm
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+      data-testid="form">
       <input
         type="text"
         aria-invalid="true"
@@ -23,7 +24,7 @@ const AddItemForm: React.FC<AddItemProps> = ({ newTodo, onChange, onSubmit }) =>
         value={newTodo}
         onChange={onChange}
         />
-      <button type="submit" disabled={newTodo.length === 0 }>Add</button>
+      <button type="submit" disabled={newTodo ? false : true}>Add</button>
     </StyledForm>
   );  
 }
