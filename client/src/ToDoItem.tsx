@@ -14,9 +14,7 @@ const StyledListItem = styled.li`
   }
 `;
 
-// merkst selbst, ne? 😅
-export const DeleteButton = styled.span`
-  cursor: pointer;
+export const DeleteButton = styled.button`
 `;
 
 const ToDoItem: React.FC<ToDoItemProps> = ({ id, text, onDelete }) => {
@@ -27,7 +25,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ id, text, onDelete }) => {
         id={`todo-${id}`} 
         data-testid="checkbox" />
       <label htmlFor={`todo-${id}`}>{text}</label>
-      <DeleteButton onClick={() => onDelete(id)} style={{ cursor: 'pointer' }} data-testid="delete-button">&times;</DeleteButton>
+      <DeleteButton onClick={() => onDelete(id)} data-testid="delete-button" aria-label={`delete ${text}`}>&times;</DeleteButton>
     </StyledListItem>
   );
 };

@@ -12,7 +12,7 @@ describe('Add Item Form', () => {
     addItemForm = render(
       <AddItemForm newTodo="" onChange={onChange} onSubmit={onSubmit} />
       );
-    input = addItemForm.getByLabelText('Create new todo item') as HTMLInputElement;
+    input = addItemForm.getByLabelText('Write new todo item') as HTMLInputElement;
     button = addItemForm.getByText(/Add/i) as HTMLButtonElement;
   });
 

@@ -19,8 +19,8 @@ const AddItemForm: React.FC<AddItemProps> = ({ newTodo, onChange, onSubmit }) =>
       <input
         type="text"
         aria-invalid="true"
-        aria-label="Create new todo item"
-        placeholder="e.g. get hyped to Deichkind"
+        aria-label="Write new todo item"
+        placeholder="e.g. Cross fingers 🤞"
         value={newTodo}
         onChange={onChange}
         />

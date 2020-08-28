@@ -19,12 +19,22 @@ const StyledList = styled.ul`
   min-width: 50%;
 `;
 
-const StyledErrorMessage = styled.div`
+const StyledErrorMessage = styled.p`
   color: red;
 `;
 
 const EmptyState = styled.div<{ showEmptyState: boolean }>`
   display: ${props => props.showEmptyState ? 'block' : 'none'};
+`;
+
+const LiveFeedback = styled.div`
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding:0 !important;
+  border:0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
 `;
 
 const ErrorMessage: React.FC<{message?: string}> = ({ message }) => {
@@ -38,6 +48,7 @@ const ErrorMessage: React.FC<{message?: string}> = ({ message }) => {
 const App: React.FC = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+  const [liveFeedback, setLiveFeedback] = useState('');
   const [hasErrors, setHasErrors] = useState(false);
   const [error, setError] = useState('');
 
@@ -90,6 +101,7 @@ const App: React.FC = () => {
     })
     .then(() => {
       setTodos([...todos, {id: newId, text: newTodo}]);
+      setLiveFeedback(`${newTodo} added`);
       setNewTodo('');
     })
     .catch((error) => {
@@ -109,8 +121,14 @@ const App: React.FC = () => {
     })
     .then(() => {
       const deleteId = id;
+      const deleteItem = todos.find(el => el.id === deleteId)?.text;
       const updatedTodos = todos.filter((el) => (el.id !== deleteId));
+
+      setLiveFeedback(`${deleteItem} deleted`);
       setTodos(updatedTodos);
+      // after deletion focus first todo in list or add item input
+      todos.length === 0 ?
+        (document.querySelector('ul input') as HTMLInputElement).focus() : (document.querySelector('input') as HTMLInputElement).focus();
     })
     .catch((error) => {
       handleError(error);
@@ -133,12 +151,17 @@ const App: React.FC = () => {
       </StyledList>
 
       <EmptyState showEmptyState={!todos.length}>
-        <p>There is nothing to do here. Add your first one. &#x2193;</p>
+        <p>There is nothing to do (yet). Add your first todo now!</p>
+        <p>Or chill. Who am I to tell you how to spend your day. <span role="img" aria-label="wink emoji">😉</span></p>
       </EmptyState>
 
       <AddItemForm newTodo={newTodo} onChange={handleChange} onSubmit={handleSubmit} />
 
       {hasErrors && <ErrorMessage message={error}/>}
+
+      <LiveFeedback role="status" aria-live="polite">
+        {liveFeedback}
+      </LiveFeedback>
 
     </Main>
   );
