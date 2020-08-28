@@ -25,6 +25,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "jest": {
+    "coveragePathIgnorePatterns" : [
+      "src/index.tsx"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
