@@ -13,7 +13,7 @@ describe('Add Item Form', () => {
       <AddItemForm newTodo="" onChange={onChange} onSubmit={onSubmit} />
       );
     input = addItemForm.getByLabelText('Write new todo item') as HTMLInputElement;
-    button = addItemForm.getByText(/Add/i) as HTMLButtonElement;
+    button = addItemForm.getByRole('button') as HTMLButtonElement;
   });
 
   it('is NOT possible to add item, when input field empty', () => {

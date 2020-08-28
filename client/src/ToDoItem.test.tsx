@@ -16,7 +16,7 @@ describe('Todo Item', () => {
   it('displays todo text', () => {
     const todoText = todoItem.getByText(testText);
 
-    expect(todoText.textContent).toBe(testText);
+    expect(todoText.textContent).toContain(testText);
   });
   
   it('is initially not checked off', () => {
