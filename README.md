@@ -1,5 +1,20 @@
 # Coding Challenge: To-Do List
 
+## Get going
+
+To run the server:
+
+```bash
+npm start
+```
+
+To run the client:
+
+```bash
+cd client
+npm start
+```
+
 ### Objective
 Create a single page web application to manage a task list using React.
 
