@@ -16,6 +16,10 @@ const StyledListItem = styled.li`
   padding: 12px 48px;
   background: hsla(40, 20%, 95%, 0.7);
   border-radius: 5px;
+
+  &:last-of-type{
+    margin-bottom: 0;
+  }
 `;
 
 const StyledInput = styled.input`

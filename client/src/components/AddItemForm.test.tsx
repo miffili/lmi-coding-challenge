@@ -38,8 +38,7 @@ describe('Add Item Form', () => {
     expect(onChange).toBeCalled();
   });
 
-  // again, Klara, for real the naming. 🙄😅
-  it('submits form, when form submitted', () => {
+  it('submits form, when either button is clicked or enter key is pressed', () => {
     form = addItemForm.getByTestId('form');
 
     fireEvent.change(input, { target: { value: 'test add item form' } });

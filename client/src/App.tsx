@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ToDoItem from './ToDoItem';
-import AddItemForm from './AddItemForm';
-import ErrorMessage from './ErrorMessage';
+
+import ToDoItem from './components/ToDoItem';
+import AddItemForm from './components/AddItemForm';
+import ErrorMessage from './components/ErrorMessage';
 
 const Main = styled.main`
   width: 85vw;
@@ -215,7 +216,7 @@ const App: React.FC = () => {
 
       setLiveFeedback(`${deleteItem} deleted`);
       setTodos(updatedTodos);
-      // after deletion focus first todo in list or add item input
+      // after deletion, focus first todo in list or add item input
       todos.length === 0 ?
         (document.querySelector('ul input') as HTMLInputElement).focus() : (document.querySelector('input') as HTMLInputElement).focus();
       setHasErrors(false);
